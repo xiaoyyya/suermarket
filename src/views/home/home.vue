@@ -87,10 +87,10 @@ export default {
     this.$refs.scroll.scrollTo(0,this.saveY,0)
   },
   deactivated() {
-    this.saveY=this.$refs.scroll.getScrollY()
-    this.$refs.scroll.refresh()
-
-    // 2.取消全局事件的监听
+    // 保存离开时的位置信息到this.saveY
+    this.saveY = this.$refs.scroll.getScrollY()
+    console.log(this.saveY);
+    // 2.取消全局事件监听（主页图片加载的监听）因为此时设置了keep-alive，所以离开时调用的是deactivated()
     bus.$off('itemImageLoad',this.itemImgListener)
   },
 

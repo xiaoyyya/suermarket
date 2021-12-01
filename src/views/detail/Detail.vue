@@ -18,6 +18,7 @@
     </scroll>
     <detail-bottom-bar @addCart='addToCart'></detail-bottom-bar>
     <back-top v-show='isShowBackTop' @click.native="backTop"></back-top>
+     <toast :message='message' :isShow='isShow'/>
   </div>
 </template>
 
@@ -36,7 +37,7 @@ import DetailBottomBar from "./childComponents/DetailBottomBar";
 import BackTop from "components/content/backTop/BackTop";
 import bus from '@/bus'
 import {debounce} from "common/utils";
-
+import Toast from 'components/common/toast/Toast'
 export default {
   name: "Detail",
   components:{
@@ -50,7 +51,9 @@ export default {
     DetailParamInfo,
     DetailCommontInfo,
     DetailBottomBar,
-    BackTop
+    BackTop,
+    Toast
+
   },
   data(){
     return{
@@ -66,7 +69,9 @@ export default {
       topYs: [],
       getTopYs: null,
       currentIndex: 0,
-      isShowBackTop: false
+      isShowBackTop: false,
+      message: '',
+      isShow: false
     }
   },
 
@@ -93,9 +98,9 @@ export default {
       }
 
     })
-    //2.获取评论
+    //2.获取推荐
     getRecommend().then(res => {
-      // console.log(res);
+      console.log(res);
       this.recommends = res.data.list
     })
     // 3. 为topYs设置防抖
@@ -187,12 +192,12 @@ export default {
         // 3.如果添加购物车成功（用promise监视成功与否）
         .then(res => {
           // console.log(res);
-          // this.isShow = true
-          // this.message = res
-          // setTimeout(() => {
-          //   this.isShow = false
-          // },1000)
-          this.$toast.show(res, 1000)
+          this.isShow = true
+          this.message = res
+          setTimeout(() => {
+            this.isShow = false
+          },1000)
+
         })
     }
   }

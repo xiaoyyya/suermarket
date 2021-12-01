@@ -12,7 +12,7 @@ const Detail=() =>import("../views/detail/Detail")
 //2.创建router
 const routes = [{
   path: '',
-  redirect: '/home'
+  redirect: '/home',
 }, {
   path: '/home',
   name:'home',
@@ -23,19 +23,31 @@ const routes = [{
 },
   {
     path: '/cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      keepAlive: false //设置页面是否需要使用缓存
+    }
   },
   {
     path: '/category',
-    component: Category
+    component: Category,
+    meta: {
+      keepAlive: false //设置页面是否需要使用缓存
+    }
   },
   {
     path: '/profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      keepAlive: false //设置页面是否需要使用缓存
+    }
   },
   {
     path: '/detail/:iid',
-    component: Detail
+    component: Detail,
+    meta: {
+      keepAlive: false //设置页面是否需要使用缓存
+    }
   }
 
 ];

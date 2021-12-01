@@ -12,7 +12,7 @@
 <script>
 import bus from '@/bus'
 export default {
-  name: "GoodsListItem",
+  name: 'GoodsListItem',
   props: {
     goodsItem: {
       type: Object,
@@ -21,37 +21,20 @@ export default {
       }
     }
   },
-  computed:{
-    showImage(){
-      return this.goodsItem.image||this.goodsItem.show.img
+  computed: {
+    showImage () {
+      return this.goodsItem.image || this.goodsItem.img || this.goodsItem.show.img
     }
   },
-  // computed: {
-  //   // 商品详情页推荐信息 复用 这个组件
-  //   showImage() {
-  //     return this.goodsItem.image || this.goodsItem.show.img||this.goodsItem.img
-  //   }
-  // },
-  methods:{
+  methods: {
+    imageLoad () {
+      bus.$emit("itemImageLoad")
 
-    imageLoad(){
-      //通过路由判断是首页还是详情页在加载数据
-      // if (this.route.path('./home')){
-      //   bus.$emit('homeItemImageLoad')
-      // }else if(this.route.path('./detail')){
-      //   bus.$emit('detailItemImageLoad')
-      // }
-      bus.$emit('imageLoad')
     },
-
-
-
     itemClick () {
-      //跳转到详情页
       this.$router.push('/detail/'+this.goodsItem.iid)
     }
   }
-
 }
 </script>
 
